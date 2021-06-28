@@ -30,5 +30,4 @@ Implemented using:
 
 HTML
 CSS
-JAVASCRIPT
 SQL
