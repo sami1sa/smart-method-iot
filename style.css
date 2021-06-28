@@ -1,0 +1,20 @@
+.slidecontainer {
+  width: 50%;
+  margin: 5%;
+  margin-top: 2cm;
+  height: 5%;
+  margin-left: 30%;
+}
+
+/* The slider itself */
+.slider {
+  -webkit-appearance: none; /* Override default CSS styles */
+  appearance: none;
+  width: 90%; /* Full-width */
+  height: 10px; /* Specified height */
+  background: #d3d3d3; /* Grey background */
+}
+
+.button {
+  margin-left: 11.5cm;
+}
