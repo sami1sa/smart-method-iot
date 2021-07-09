@@ -1,0 +1,549 @@
+{
+  "intents": [
+    {
+      "intent": "greeting",
+      "examples": [
+        {
+          "text": "aslam alaikom"
+        },
+        {
+          "text": "Black widow"
+        },
+        {
+          "text": "hello"
+        },
+        {
+          "text": "hi"
+        },
+        {
+          "text": "hillo"
+        },
+        {
+          "text": "ok"
+        },
+        {
+          "text": "welco"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "recommend_book",
+      "examples": [
+        {
+          "text": "Biography"
+        },
+        {
+          "text": "Dystopia Fiction"
+        },
+        {
+          "text": "Fantasy"
+        },
+        {
+          "text": "Historical Fiction"
+        },
+        {
+          "text": "Kids"
+        },
+        {
+          "text": "Memoir"
+        },
+        {
+          "text": "Mystery/Horror"
+        },
+        {
+          "text": "Psychology"
+        },
+        {
+          "text": "Realistic Fiction"
+        },
+        {
+          "text": "Science Fiction"
+        },
+        {
+          "text": "Short Stories"
+        },
+        {
+          "text": "Young Adult"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "thank_you",
+      "examples": [
+        {
+          "text": "thanks"
+        },
+        {
+          "text": "thank you"
+        }
+      ],
+      "description": ""
+    }
+  ],
+  "entities": [
+    {
+      "entity": "book_gener",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "Biography",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Dystopia Fiction",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Fantasy",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Historical Fiction",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Kids",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Memoir",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Mystery",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Psychology",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Realistic Fiction",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Science Fiction",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Short Stories",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Young Adult",
+          "synonyms": []
+        }
+      ],
+      "fuzzy_match": true
+    }
+  ],
+  "metadata": {
+    "api_version": {
+      "major_version": "v2",
+      "minor_version": "2018-11-08"
+    }
+  },
+  "dialog_nodes": [
+    {
+      "type": "standard",
+      "title": "Anything else",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "I didn't understand. You can try rephrasing."
+              },
+              {
+                "text": "Can you reword your statement? I'm not understanding."
+              },
+              {
+                "text": "I didn't get your meaning."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "anything_else",
+      "dialog_node": "Anything else",
+      "previous_sibling": "node_10_1625861695640",
+      "disambiguation_opt_out": true
+    },
+    {
+      "type": "standard",
+      "title": "thank you",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Thank you glad to help you"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#thank_you",
+      "dialog_node": "node_10_1625861695640",
+      "previous_sibling": "node_10_1625864253157"
+    },
+    {
+      "type": "standard",
+      "title": "book gen",
+      "parent": "node_10_1625864253157",
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "@book_gener",
+      "dialog_node": "node_10_1625863172650"
+    },
+    {
+      "type": "standard",
+      "title": "recommend book",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "sure"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "condition",
+        "dialog_node": "node_10_1625863172650"
+      },
+      "conditions": "#recommend_book",
+      "digress_in": "does_not_return",
+      "dialog_node": "node_10_1625864253157",
+      "previous_sibling": "node_7_1625861662070"
+    },
+    {
+      "type": "standard",
+      "title": "greeting",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Hi, what kind of books do you want?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#greeting",
+      "dialog_node": "node_7_1625861662070",
+      "previous_sibling": "Welcome"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "1. Into the Wild by Jon Krakauer 2. Steve Jobs (Hardcover)  3. The Diary of a Young Girl (Mass Market Paperback)  4. The Immortal Life of Henrietta LacksThe Immortal Life of Henrietta Lacks (Hardcover)  5. Alexander Hamilton by Ron Chernow   6. Einstein: His Life and Universe (Hardcover)  7. Elon Musk: Tesla, SpaceX, and the Quest for a Fantastic Future (Hardcover)  8. I Am Malala: The Story of the Girl Who Stood Up for Education and Was Shot by the Taliban"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_10_1625863172650",
+      "conditions": "@book_gener:Biography",
+      "dialog_node": "response_10_1625863523202"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "1. Mr. Penumbra’s 24-Hour Bookstore by Robin Sloan 2. Tell the Wolves I’m Home by Carol Rifka Brunt"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_10_1625863172650",
+      "conditions": "@book_gener:(Realistic Fiction)",
+      "dialog_node": "response_10_1625863744704",
+      "previous_sibling": "response_1_1625863720445"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "1. California by Edan Lepucki 2. We by Yevgeny Zamyatin"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_10_1625863172650",
+      "conditions": "@book_gener:(Dystopia Fiction)",
+      "dialog_node": "response_1_1625863720445",
+      "previous_sibling": "response_6_1625863698905"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "1. Hot Water Music by Charles Bukowski 2. Smoke and Mirrors by Neil Gaiman"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_10_1625863172650",
+      "conditions": "@book_gener:(Short Stories)",
+      "dialog_node": "response_2_1625863815947",
+      "previous_sibling": "response_8_1625863792151"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "1. Don't Let the Pigeon Drive the Bus Book Poster Image 2. Silliness that appeals to preschoolers. 3. Charming bedtime book is magic for truck lovers. 4. Goodnight Moon Book Poster Image 5. Ultimate going-to-bed book has stood the test of time. 6. The Snowy Day Book Poster Image"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_10_1625863172650",
+      "conditions": "@book_gener:Kids",
+      "dialog_node": "response_2_1625863852627",
+      "previous_sibling": "response_8_1625863837044"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "1. The Shadow of the Wind by Carlos Ruis Zafon 2. Sharp Objects by Gillian Flynn 3. The Road by Cormac McCarthy 4. The Bride Collector by Ted Dekker"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_10_1625863172650",
+      "conditions": "@book_gener:Mystery",
+      "dialog_node": "response_3_1625863656454",
+      "previous_sibling": "response_10_1625863523202"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "1. The Liars’ Club by Mary Karr 2. The Glass Castle by Jeannette Walls 3. Same Kind of Different as Me by Ron Hall 4. Smoke Gets in Your Eyes: and Other Lessons from the Crematory by Caitlin Doughty"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_10_1625863172650",
+      "conditions": "@book_gener:Memoir",
+      "dialog_node": "response_3_1625863676313",
+      "previous_sibling": "response_3_1625863656454"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "1. Black (series) by Ted Dekker 2. Black Moon by Kenneth Calhoun 3. The Bone Clocks by David Mitchell"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_10_1625863172650",
+      "conditions": "@book_gener:(Science Fiction)",
+      "dialog_node": "response_3_1625863760813",
+      "previous_sibling": "response_10_1625863744704"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "1. The Graveyard Book by Neil Gaiman 2. The Snow Child by Eowyn Ivey 3. Never Let me Go by Kazuo Ishiguro"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_10_1625863172650",
+      "conditions": "@book_gener:Fantasy",
+      "dialog_node": "response_5_1625863777197",
+      "previous_sibling": "response_3_1625863760813"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "1. Brain on Fire by Susannah Cahalan 2. Girl, Interrupted by Susanna Kaysen 3. Darkness Visible by William Styron"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_10_1625863172650",
+      "conditions": "@book_gener:Psychology",
+      "dialog_node": "response_6_1625863698905",
+      "previous_sibling": "response_3_1625863676313"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "1. Black Water by Joyce Carol Oates 2. Libra by Don DeLillo"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_10_1625863172650",
+      "conditions": "@book_gener:(Historical Fiction)",
+      "dialog_node": "response_8_1625863792151",
+      "previous_sibling": "response_5_1625863777197"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "1. We Were Liars by E. Lockhart 2. The Fever by Megan Abbott 3. Eleanor & Park by Rainbow Rowell 4. Miss Peregrine’s Home for Peculiar Children by Ransom Riggs"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_10_1625863172650",
+      "conditions": "@book_gener:(Young Adult)",
+      "dialog_node": "response_8_1625863837044",
+      "previous_sibling": "response_2_1625863815947"
+    },
+    {
+      "type": "standard",
+      "title": "Welcome",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Hello. How are you?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "random"
+          }
+        ]
+      },
+      "conditions": "welcome",
+      "dialog_node": "Welcome"
+    }
+  ],
+  "counterexamples": [],
+  "system_settings": {
+    "off_topic": {
+      "enabled": true
+    },
+    "disambiguation": {
+      "prompt": "Did you mean:",
+      "enabled": true,
+      "randomize": true,
+      "max_suggestions": 5,
+      "suggestion_text_policy": "title",
+      "none_of_the_above_prompt": "None of the above"
+    },
+    "human_agent_assist": {
+      "prompt": "Did you mean:"
+    },
+    "intent_classification": {
+      "training_backend_version": "v2"
+    },
+    "spelling_auto_correct": true
+  },
+  "learning_opt_out": false,
+  "name": "speak",
+  "language": "en",
+  "description": ""
+}
